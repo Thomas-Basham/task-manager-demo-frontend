@@ -21,7 +21,7 @@ export default function Home() {
   // }
 
   return (
-    <main className="flex min-h-screen p-24 flex-col items-center ">
+    <>
       <div className="p-5  w-50  w-full ">
         <CreateProjectBtn />
       </div>
@@ -35,6 +35,6 @@ export default function Home() {
         <Project />
         <Project />
       </div>
-    </main>
+    </>
   );
 }
