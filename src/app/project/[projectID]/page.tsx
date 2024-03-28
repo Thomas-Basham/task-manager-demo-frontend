@@ -1,7 +1,11 @@
 import React from "react";
 import Task from "@/app/components/Task";
 import Project from "@/app/components/Project";
-export default function ProjectPage({ params }) {
+export default function ProjectPage({
+  params,
+}: {
+  params: { projectID: string };
+}) {
   return (
     <main className="flex min-h-screen p-24 flex-col items-center ">
       <div>Project Page for id {params.projectID}</div>
