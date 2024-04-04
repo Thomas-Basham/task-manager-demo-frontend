@@ -73,7 +73,7 @@ export default function NewProjectModal({
   function handleFormSubmit(event: FormEvent) {
     event.preventDefault();
     const newProject: Project = {
-      id: String(Date.now()), // Simplified unique ID generation
+      projectid: String(Date.now()), // Simplified unique ID generation
       // @ts-ignore
       projectName: event?.target?.projectName.value,
       // @ts-ignore
