@@ -11,24 +11,6 @@ export default function Home() {
   const [users, setUsers] = useState<Object[]>([]);
   const [isModalOpen, setIsModalOpen] = useState(false);
 
-  const mockProjects = [
-    {
-      id: "1",
-      projectName: "Redesign Website",
-      description:
-        "A project to redesign our corporate website with a new UX/UI approach.",
-      createdAt: new Date("2024-01-01").toLocaleDateString(),
-      createdBy: "1", // Assuming this references a user ID from the mockUsers array.
-    },
-    {
-      id: "2",
-      projectName: "Develop New Product Features",
-      description:
-        "This project is focused on adding new features to our existing products.",
-      createdAt: new Date("2024-02-15").toLocaleDateString(),
-      createdBy: "2",
-    },
-  ];
   const mockUsers = [
     {
       id: "1",
@@ -46,22 +28,22 @@ export default function Home() {
     },
   ];
   useEffect(() => {
-    // if (baseURL) {
-    //   axios
-    //     .get(baseURL + "/")
-    //     .then(function (response) {
-    //       // handle success
-    //       console.log(response.data);
-    //     })
-    //     .catch(function (error) {
-    //       // handle error
-    //       console.log(error);
-    //     })
-    //     .finally(function () {
-    //       // always executed
-    //     });
-    // }
-    setProjects(mockProjects);
+    if (baseURL) {
+      axios
+        .get(baseURL + "/projects")
+        .then(function (response) {
+          // handle success
+          console.log(response.data);
+          setProjects(response.data);
+        })
+        .catch(function (error) {
+          // handle error
+          console.log(error);
+        })
+        .finally(function () {
+          // always executed
+        });
+    }
     setUsers(mockUsers);
     return () => {
       return;
@@ -88,7 +70,7 @@ export default function Home() {
         <hr className="border-cyan-600 mb-4"></hr>
         {projects.map((project) => {
           return (
-            <div key={project.id}>
+            <div key={project.projectid}>
               <Project hideTasksButton={false} project={project} />
             </div>
           );

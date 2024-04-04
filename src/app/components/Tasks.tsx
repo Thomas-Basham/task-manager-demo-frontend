@@ -5,6 +5,8 @@ import { table } from "console";
 // import { Task, TasksProps } from "../interfaces"; // Assuming you've defined these in a separate file.
 
 const Tasks: React.FC<TasksProps> = ({ projectId }) => {
+  const baseURL: string | undefined = process.env.NEXT_PUBLIC_SERVER;
+
   const [tasks, setTasks] = useState<Task[]>([]);
   const [isAdding, setIsAdding] = useState(false); // To toggle add task form
   const [taskTitle, setTaskTitle] = useState<string>("");
@@ -13,39 +15,28 @@ const Tasks: React.FC<TasksProps> = ({ projectId }) => {
 
   useEffect(() => {
     const fetchTasks = async () => {
-      // const response = await axios.get<Task[]>(
-      //   `/api/tasks?projectId=${projectId}`
-      // );
-      // setTasks(response.data);
-      setTasks([
-        {
-          id: "1",
-          title: "Create New Landing Page",
-          description:
-            "Design and develop a new landing page to improve conversion rates.",
-          status: "in_progress",
-          priority: "high",
-          projectId: "1", // Assuming this task belongs to the "Redesign Website" project.
-          assignedTo: "1", // Assuming this task is assigned to John Doe.
-          createdAt: new Date("2024-01-10").toLocaleDateString(),
-          dueDate: new Date("2024-02-01").toLocaleDateString(),
-        },
-        {
-          id: "2",
-          title: "Implement SEO Best Practices",
-          description:
-            "Review and update the website's content and meta tags for SEO.",
-          status: "todo",
-          priority: "medium",
-          projectId: "1",
-          assignedTo: "2", // Assuming this task is assigned to Sarah White.
-          createdAt: new Date("2024-01-15").toLocaleDateString(),
-          dueDate: new Date("2024-03-02").toLocaleDateString(),
-        },
-      ]);
+      if (baseURL) {
+        axios
+          .get(baseURL + "/tasks")
+          .then(function (response) {
+            // handle success
+            console.log(response.data);
+            const filteredTasks = response.data.filter((task: Task) => {
+              return task.projectid == projectId;
+            });
+            setTasks(filteredTasks);
+          })
+          .catch(function (error) {
+            // handle error
+            console.log(error);
+          })
+          .finally(function () {
+            // always executed
+          });
+      }
     };
     fetchTasks();
-  }, [projectId]);
+  }, []);
 
   const addTask = () => {
     setIsAdding(true);
@@ -101,7 +92,7 @@ const Tasks: React.FC<TasksProps> = ({ projectId }) => {
       </thead>
       <tbody>
         {tasks.map((task) => (
-          <TaskRow key={task.id} task={task} onUpdate={updateTask} />
+          <TaskRow key={task.taskid} task={task} onUpdate={updateTask} />
         ))}
         {isAdding && (
           <tr className="bg-white dark:bg-gray-800 hover:bg-gray-50 dark:hover:bg-gray-600">

@@ -5,10 +5,10 @@ interface Task {
   description: string;
   status: string; // Consider using an enum if you have a fixed set of statuses.
   priority: string; // Same as status, consider an enum for fixed priority levels.
-  projectId: string;
-  assignedTo: string;
-  createdAt: string;
-  dueDate: string;
+  projectid: string;
+  assignedto: string;
+  createdat: string;
+  duedate: string;
   // Add other task fields as necessary.
 }
 

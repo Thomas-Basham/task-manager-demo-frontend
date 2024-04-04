@@ -1,7 +1,7 @@
 interface Project {
-  id: string;
-  projectName: string;
+  projectid: string;
+  projectname: string;
   description: string;
-  createdAt: string; // ISO date string format
-  createdBy: string; // User ID of the project creator
+  createdat: string; // ISO date string format
+  createdby: string; // User ID of the project creator
 }
