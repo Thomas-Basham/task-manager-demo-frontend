@@ -46,7 +46,9 @@ const Tasks: React.FC<TasksProps> = ({ projectId }) => {
   const updateTask = async (updatedTask: Task) => {
     // await axios.put(`/api/tasks/${updatedTask.id}`, updatedTask);
     setTasks(
-      tasks.map((task) => (task.id === updatedTask.id ? updatedTask : task))
+      tasks.map((task) =>
+        task.taskid === updatedTask.taskid ? updatedTask : task
+      )
     );
   };
   const saveNewTask = async (task: Task) => {
@@ -148,15 +150,15 @@ const Tasks: React.FC<TasksProps> = ({ projectId }) => {
                 className="px-4 py-1 text-white bg-blue-500 hover:bg-blue-600 rounded"
                 onClick={() =>
                   saveNewTask({
-                    id: String(Date.now()), // Temporary; replace with actual ID from backend
+                    taskid: String(Date.now()), // Temporary; replace with actual ID from backend
                     title: taskTitle,
                     description: taskDescription,
                     status: "todo",
                     priority: "medium",
-                    projectId: projectId,
-                    assignedTo: "", // Placeholder; adjust as needed
-                    createdAt: new Date().toLocaleDateString(),
-                    dueDate: taskDueDate || new Date().toLocaleDateString(),
+                    projectid: projectId,
+                    assignedto: "", // Placeholder; adjust as needed
+                    createdat: new Date().toLocaleDateString(),
+                    duedate: taskDueDate || new Date().toLocaleDateString(),
                   })
                 }
               >

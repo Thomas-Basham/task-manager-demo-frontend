@@ -1,6 +1,6 @@
 // interfaces/Task.ts
 interface Task {
-  id: string;
+  taskid: string;
   title: string;
   description: string;
   status: string; // Consider using an enum if you have a fixed set of statuses.

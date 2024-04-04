@@ -83,11 +83,11 @@ const TaskRow: React.FC<TaskRowProps> = ({ task, onUpdate }) => {
             className="w-full text-gray-900 mt-1 px-2 py-1 border rounded-md shadow-sm dark:bg-gray-700 dark:text-white"
             type="date"
             name="dueDate"
-            value={editedTask.dueDate.split("T")[0]} // Assuming dueDate is in ISO format
+            value={editedTask.duedate.split("T")[0]} // Assuming dueDate is in ISO format
             onChange={handleEditChange}
           />
         ) : (
-          new Date(task.dueDate).toLocaleDateString()
+          new Date(task.duedate).toLocaleDateString()
         )}
       </td>
       <td className="p-2">
